@@ -18,14 +18,14 @@
 #
 # Quartus II 64-Bit
 # Version 13.1.4 Build 182 03/12/2014 SJ Web Edition
-# Date created = 13:25:11  March 06, 2020
+# Date created = 13:31:28  March 06, 2020
 #
 # -------------------------------------------------------------------------- #
 #
 # Notes:
 #
 # 1) The default values for assignments are stored in the file:
-#		6502_interface_assignment_defaults.qdf
+#		interface_6502_assignment_defaults.qdf
 #    If this file doesn't exist, see file:
 #		assignment_defaults.qdf
 #
@@ -38,9 +38,9 @@
 
 set_global_assignment -name FAMILY "Cyclone III"
 set_global_assignment -name DEVICE EP3C16F484C6
-set_global_assignment -name TOP_LEVEL_ENTITY 6502_interface
+set_global_assignment -name TOP_LEVEL_ENTITY interface_6502
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.1
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:25:11  MARCH 06, 2020"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "13:31:28  MARCH 06, 2020"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
