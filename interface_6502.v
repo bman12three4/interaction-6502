@@ -19,32 +19,14 @@ module interface_6502 (
 	reg [3:0] curr_addr;		// Current address
 	reg wr;
 	
-	reg newdata = 1'b1;
-	
 	always @ (posedge chipclk) begin
 			curr_addr = rs;
 	end
 	
-	always @ (negedge chipclk) begin
+	always @ (negedge chipclk) begin		// Main code should run here, after data has been recieved
 			int_reg[curr_addr] = data_in;
-			led <= int_reg[curr_addr];
+			
+			led <= int_reg[4'b0];
 	end
-	
-	/*
-	always @ (posedge cs) begin
-		if (~wr) begin
-			newdata <= 1'b0;				
-			int_reg[curr_addr] = data_in;	// Load data into selected register
-			newdata <= 1'b1;				// Then signal that new data has arrived
-		end
-	end
-	
-	
-	always @ (posedge newdata) begin
-		led <= int_reg[4'b0];
-	end
-	
-	*/
-	
 	
 endmodule
