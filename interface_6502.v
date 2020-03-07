@@ -1,5 +1,5 @@
 module interface_6502 (
-		input clk,	// Internal 50MHz clock (phi2)
+		input clk,			// Internal 50MHz clock
 		input clk_ext1,	// External 1 MHz clock
 
 		input cs,			// Chip Select (Active Low)
@@ -14,10 +14,24 @@ module interface_6502 (
 	
 	assign chipclk = clk_ext1 & ~cs;
 	
-	reg [7:0] int_reg [15:0]; // 16 8 bit registers
+	reg [7:0] int_reg [3:0]; // 16 8 bit registers
 	
 	reg [3:0] curr_addr;		// Current address
-	reg wr;
+	
+	wire [7:0] ram_out;
+	
+	wire ram_wren;
+	
+	assign ram_wren = (curr_addr == 4'b1) ? 1'b1 : 1'b0;
+	
+	ram a (
+		.address (int_reg[0]),
+		.clock (clk),
+		.data (int_reg[1]),
+		.wren (ram_wren),
+		.q (ram_out)
+	);
+
 	
 	always @ (posedge chipclk) begin
 			curr_addr = rs;
@@ -25,8 +39,6 @@ module interface_6502 (
 	
 	always @ (negedge chipclk) begin		// Main code should run here, after data has been recieved
 			int_reg[curr_addr] = data_in;
-			
-			led <= int_reg[4'b0];
 	end
 	
 endmodule
